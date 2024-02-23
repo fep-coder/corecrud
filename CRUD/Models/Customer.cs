@@ -1,8 +1,11 @@
-﻿namespace CRUD.Models
+﻿using System.ComponentModel;
+
+namespace CRUD.Models
 {
     public class Customer
     {
         public int Id { get; set; }
+        [DisplayName("First Name")]
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Email { get; set; }

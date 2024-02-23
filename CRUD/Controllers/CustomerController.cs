@@ -14,5 +14,10 @@ namespace CRUD.Controllers
 
             return View(customers);
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
