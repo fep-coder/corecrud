@@ -34,6 +34,8 @@ namespace CRUD.Controllers
                 _db.Customers.Add(customer);
                 _db.SaveChanges();
 
+                TempData["success"] = "Customer created successfully";
+
                 return RedirectToAction("Index");
             }
 
@@ -66,6 +68,8 @@ namespace CRUD.Controllers
                 _db.Customers.Update(customer);
                 _db.SaveChanges();
 
+                TempData["success"] = "Customer edited successfully";
+
                 return RedirectToAction("Index");
             }
 
@@ -83,6 +87,8 @@ namespace CRUD.Controllers
 
             _db.Customers.Remove(customer);
             _db.SaveChanges();
+
+            TempData["success"] = "Customer deleted successfully";
 
             return RedirectToAction("Index");
         }
