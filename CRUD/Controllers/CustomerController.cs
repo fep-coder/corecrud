@@ -1,12 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CRUD.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CRUD.Controllers
 {
-    public class CustomerController : Controller
+    public class CustomerController(ApplicationDbContext db) : Controller
     {
+
+        private readonly ApplicationDbContext _db = db;
+
         public IActionResult Index()
         {
-            return View();
+            List<Customer> customers = _db.Customers.ToList();
+
+            return View(customers);
         }
     }
 }
