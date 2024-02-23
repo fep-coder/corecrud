@@ -39,5 +39,53 @@ namespace CRUD.Controllers
 
             return View();
         }
+
+        public IActionResult Edit(int? id)
+        {
+            Customer? customer = _db.Customers.Find(id);
+
+            if (id == null || id == 0 || customer == null)
+            {
+                return NotFound();
+            }
+
+            return View(customer);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Customer customer)
+        {
+
+            if (_db.Customers.Any(c => c.Email!.Equals(customer.Email) && c.Id != customer.Id))
+            {
+                ModelState.AddModelError("email", "E-mail is already taken");
+            }
+
+            if (ModelState.IsValid)
+            {
+                _db.Customers.Update(customer);
+                _db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            Customer? customer = _db.Customers.Find(id);
+
+            if (id == null || id == 0 || customer == null)
+            {
+                return NotFound();
+            }
+
+            _db.Customers.Remove(customer);
+            _db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
     }
 }
