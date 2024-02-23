@@ -23,6 +23,12 @@ namespace CRUD.Controllers
         [HttpPost]
         public IActionResult Create(Customer customer)
         {
+
+            if (_db.Customers.Any(c => c.Email!.Equals(customer.Email)))
+            {
+                ModelState.AddModelError("email", "E-mail is already taken");
+            }
+
             if (ModelState.IsValid)
             {
                 _db.Customers.Add(customer);
